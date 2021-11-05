@@ -1,0 +1,367 @@
+public String doubleChar(String str)
+{
+	int len = str.length();
+	char ch;
+	StringBuilder stbuild = new StringBuilder(len*2);
+	for(int i = 0; i < len; i++)
+	{
+		ch = str.charAt(i);
+		stbuild.append(ch);
+		stbuild.append(ch);
+	}
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public int countHi(String str)
+{
+	int len = str.length()-1;
+	int times = 0;
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == 'h' && str.charAt(i+1) == 'i')
+			times++;
+	}
+	return times;
+}
+
+----------------------------------------------------
+
+public boolean catDog(String str)
+{
+
+	int len = str.length()-2;
+	int diff = 0;
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == 'c')
+		{
+			if(str.charAt(i+1) == 'a' && str.charAt(i+2) == 't')
+				diff++;
+		}
+		else if(str.charAt(i) == 'd')
+		{
+			if(str.charAt(i+1) == 'o' && str.charAt(i+2) == 'g')
+				diff--;
+		}
+	}
+	return (diff == 0);
+}
+
+----------------------------------------------------
+
+public int countCode(String str)
+{
+	int times = 0;
+	int i = 0;
+	int len = str.length()-3;
+	while(i <  len)
+	{
+		if(str.charAt(i) == 'c' && str.charAt(i+1) == 'o' && str.charAt(i+3) == 'e')
+		{
+			times++;
+			i += 4;
+		}
+		else
+			i++;
+	}
+	return times;
+}
+
+----------------------------------------------------
+
+public boolean endOther(String a, String b)
+{
+	int aLen = a.length();
+	int bLen = b.length();
+	String end;
+	String temp;
+	a = a.toLowerCase();
+	b = b.toLowerCase();
+	if(aLen >= bLen)
+	{
+		end = a.substring(aLen - bLen);
+		temp = b;
+	}
+	else
+	{
+		end = b.substring(bLen - aLen);
+		temp = a;
+	}
+	return (end.equals(temp));
+}
+
+----------------------------------------------------
+
+public boolean xyzThere(String str)
+{
+	int len = str.length() - 2;
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == 'x' && str.charAt(i+1) == 'y' && str.charAt(i+2) == 'z')
+		{
+			if(i == 0 || str.charAt(i-1) != '.')
+				return true;
+		}
+	}
+	return false;
+}
+
+----------------------------------------------------
+
+public boolean bobThere(String str)
+{
+	int len = str.length() - 2;
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == 'b' && str.charAt(i+2) == 'b')
+			return true;
+	}
+	return false;
+}
+
+--------------------------------------------------------------------------------------------------------
+
+public boolean xyBalance(String str)
+{
+	int len = str.length() - 1;
+	char ch;
+	for(int i = len; i >= 0; i--)
+	{
+		ch = str.charAt(i);
+		if(ch == 'x')
+			return false;
+		else if(ch == 'y')
+			return true;
+	}
+	return true;  
+}
+
+----------------------------------------------------
+
+public String mixString(String a, String b)
+{
+	int aLen = a.length();
+	int bLen = b.length();
+	int i = 0;
+	StringBuilder stbuild = new StringBuilder(aLen+bLen);
+	for(; i < aLen && i < bLen; i++)
+	{
+		stbuild.append(a.charAt(i));
+		stbuild.append(b.charAt(i));
+	}
+	// only 1 for loop will actually run
+	for(; i < aLen; i++)
+		stbuild.append(a.charAt(i));
+	for(; i < bLen; i++)
+		stbuild.append(b.charAt(i));
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String repeatEnd(String str, int n)
+{
+	StringBuilder stbuild = new StringBuilder(n*n);
+	String last = str.substring(str.length()-n);
+	for(int i = 0; i < n; i++)
+		stbuild.append(last);
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String repeatFront(String str, int n)
+{
+	StringBuilder stbuild = new StringBuilder((n*n + n)/2);
+	for(int i = n; i >= 1; i--)
+	{
+		for(int k = 0; k < i; k++)
+			stbuild.append(str.charAt(k));
+	}
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String repeatSeparator(String word, String sep, int count)
+{
+	if(count == 0)
+		return "";
+	StringBuilder stbuild = new StringBuilder(count*word.length()+sep.length()*(count-1));
+	for(int i = 1; i < count; i++)
+	{
+		stbuild.append(word);
+		stbuild.append(sep);	
+	}
+	stbuild.append(word);
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public boolean prefixAgain(String str, int n)
+{
+	String prfx = str.substring(0, n);
+	return (str.indexOf(prfx, 1) != -1);
+}
+
+----------------------------------------------------
+
+public boolean xyzMiddle(String str)
+{
+	int len = str.length();
+	int mid;
+	if(len < 3)
+		return false;
+	mid = len/2;
+	if(len%2 == 0)
+	{
+		if(str.charAt(mid) == 'y')
+			return(str.charAt(mid-1) == 'x' && str.charAt(mid+1) == 'z');
+		if(str.charAt(mid-1) == 'y')
+			return(str.charAt(mid-2) == 'x' && str.charAt(mid) == 'z');
+		return false;
+	}
+	else if(str.charAt(mid) == 'y')
+			return(str.charAt(mid-1) == 'x' && str.charAt(mid+1) == 'z');
+	return false;
+}
+
+----------------------------------------------------
+
+public String getSandwich(String str)
+{
+	int iFirst = str.indexOf("bread");
+	int iLast = str.lastIndexOf("bread");
+	if(iFirst != -1 && iLast != -1 && iFirst != iLast)
+		return str.substring(iFirst+5, iLast);
+	return "";
+}
+
+----------------------------------------------------
+
+public boolean sameStarChar(String str)
+{
+	int len = str.length() - 1;
+	for(int i = 1; i < len; i++)
+	{
+		if(str.charAt(i) == '*')
+		{
+			if(str.charAt(i-1) != str.charAt(i+1))
+				return false;
+		}	
+	}
+	return true;
+}
+
+----------------------------------------------------
+
+public String oneTwo(String str) {
+  String result = "";
+  for(int i=0; i <str.length()-2; i += 3)
+  {
+      result = result + str.substring(i+1,i+3) + str.charAt(i);
+  }
+  return result;
+}
+
+----------------------------------------------------
+
+public String zipZap(String str)
+{
+	int len = str.length();
+	int lim = len - 2;
+	int i = 0;
+	char ch;
+	StringBuilder stbuild = new StringBuilder(len);
+	while(i < len)
+	{
+		ch = str.charAt(i);
+		if(ch == 'z' && i < lim && str.charAt(i+2) == 'p')
+		{
+			stbuild.append("zp");
+			i += 3;
+		}
+		else
+		{
+			stbuild.append(ch);
+			i++;
+		}
+	}
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String starOut(String str)
+{
+	int len = str.length();
+	int[] indexes = new int[len];
+	char ch;
+	StringBuilder stbuild = new StringBuilder(len);
+	for(int i = 0; i < len; i++)
+	{
+		if(str.charAt(i) == '*')
+		{
+			indexes[i] = 1;
+			if(i >= 1)
+				indexes[i-1] = 1;
+			if(i < (len-1))
+				indexes[i+1] = 1;
+		}
+	}
+	for(int i = 0; i < len; i++)
+	{
+		if(indexes[i] == 0)
+			stbuild.append(str.charAt(i));
+	}
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String plusOut(String str, String word)
+{
+	int len = str.length();
+	int wLen = word.length();
+	int pos = str.indexOf(word);
+	int i = 0;
+	StringBuilder stbuild = new StringBuilder(len);
+	while(pos != -1)
+	{
+		while(i < pos)
+		{
+			stbuild.append('+');
+			i++;
+		}
+		stbuild.append(word);
+		i = pos + wLen;
+		pos = str.indexOf(word, i);
+	}
+	for(; i < len; i++)
+		stbuild.append('+');
+	return stbuild.toString();
+}
+
+----------------------------------------------------
+
+public String wordEnds(String str, String word)
+{
+	int len = str.length();
+	int wLen = word.length();
+	int pos = str.indexOf(word);
+	int i = 0;
+	StringBuilder stbuild = new StringBuilder(len);
+	while(pos != -1)
+	{
+		i = pos + wLen;
+		if(pos >= 1)
+			stbuild.append(str.charAt(pos-1));
+		if(i < len)
+			stbuild.append(str.charAt(pos+wLen));
+		pos = str.indexOf(word, i);	
+	}
+	return stbuild.toString();
+}
