@@ -1,0 +1,310 @@
+public boolean scoresIncreasing(int[] scores) {
+  boolean match = false;
+  for (int i = 0; i < scores.length-1; i++) {
+    if (scores[i+1] >= scores[i]) 
+      match = true;
+    else
+      return false;
+  }
+  return match;
+}
+
+----------------------------------------------------
+
+public boolean scores100(int[] scores) {
+  for (int i = 0; i < scores.length-1; i++) {
+    if (scores[i] == 100 && scores[i+1] == 100)
+      return true;
+    
+  }
+  return false;
+}
+
+----------------------------------------------------
+
+public boolean scoresClump(int[] scores) {
+  if (scores.length < 3)
+    return false;
+  
+  for (int i = 0; i < scores.length-2; i++) {
+    if (scores[i+2] - scores[i+1] <= 2 && scores[i+2] - scores[i] <= 2)
+      return true;
+  }
+  return false;
+}
+
+----------------------------------------------------
+
+public int scoresAverage(int[] scores) {
+  int avg1 = average(scores, 0, scores.length/2);
+  int avg2 = average(scores, scores.length/2, scores.length);
+  
+  return Math.max(avg1,avg2);  
+  
+}
+
+public int average(int[] scores, int start, int end) {
+  int sum = 0;
+  for (int i = start; i < end; i++) {
+    sum += scores[i];
+  }
+  return sum / (end-start);
+}
+
+----------------------------------------------------
+
+public int wordsCount(String[] words, int len) {
+  int count = 0;  
+  for (int i = 0; i < words.length; i++) {
+    if (words[i].length() == len)
+      count++;
+  }
+  return count;
+}
+
+----------------------------------------------------
+
+public String[] wordsFront(String[] words, int n) {
+  String[] array = new String[n];
+  for (int i = 0; i < n; i++) {
+    array[i] = words[i];
+  }
+  return array;
+}
+
+----------------------------------------------------
+
+public List wordsWithoutList(String[] words, int len) {
+  ArrayList al = new ArrayList();
+  for (int i = 0; i < words.length; i++) {
+    if (words[i].length() != len)
+      al.add(words[i]);
+  }
+  return al;
+}
+
+----------------------------------------------------
+
+public boolean hasOne(int n) 
+{
+  while(n%10!=0||n==10)
+  {
+    if(n%10 == 1)
+      return true;
+    else
+      n/=10;  
+  }   
+  return false;  
+}
+
+----------------------------------------------------
+
+public boolean dividesSelf(int n) {
+  int tmp = n;
+  if (n%10 == 0)
+    return false;
+  while(n != 0)
+  {
+   if (tmp % (n%10) != 0)
+     return false;
+    n /= 10;
+  }  
+  
+  
+  return true;  
+}
+
+----------------------------------------------------
+
+public int[] copyEvens(int[] nums, int count) {
+  int ctr = 0;
+  int[] array = new int[count];
+  for (int i = 0; i < nums.length; i++) {
+    if (nums[i] % 2 == 0) {
+      array[ctr] = nums[i];
+      ctr++;
+    }
+      if (ctr == count)
+        return array;
+  }
+  return nums;
+}
+
+----------------------------------------------------
+
+public int[] copyEndy(int[] nums, int count) {
+  int ctr = 0;
+  int[] array = new int[count];
+  for (int i = 0; i < nums.length; i++) {
+    if (isEndy(nums[i])) {
+      array[ctr] = nums[i];
+      ctr++;      
+    }
+    if (ctr == count)
+      return array;
+  }
+  return array;
+}
+
+private boolean isEndy(int n) {
+  return (n >= 0 && n <= 10) || (n <= 100 && n >= 90);
+}
+
+----------------------------------------------------
+
+public int matchUp(String[] a, String[] b) {
+  int count = 0;
+  for (int i = 0; i < a.length; i++) {
+    String tmp1 = a[i];
+    String tmp2 = b[i];
+    if (!tmp1.equals("") && !tmp2.equals("")) {
+      if (tmp1.charAt(0) == tmp2.charAt(0))
+        count++;
+    }
+    
+  }
+  return count;
+}
+
+----------------------------------------------------
+
+public int scoreUp(String[] key, String[] answers) {
+  int score = 0;
+  for (int i = 0; i < key.length; i++) {
+    if (key[i] == answers[i])
+      score += 4;
+    else if (answers[i] != "?" && answers[i] != key[i])
+      score--;
+  }
+  return score;
+}
+
+----------------------------------------------------
+
+public String[] wordsWithout(String[] words, String target) {
+  int found = 0;
+  
+  for (int i = 0; i < words.length; i++) {
+    if (words[i].equals(target))
+      found++;
+  }
+  found = words.length - found;
+  int place = 0;
+  
+  String[] str = new String[found];
+  for (int j = 0; j < words.length; j++) {
+    if (!words[j].equals(target)) {
+      str[place] = words[j];
+      place++;
+    }
+  }
+  return str;
+}
+
+----------------------------------------------------
+
+public int scoresSpecial(int[] a, int[] b) {
+  int spec1 = helper(a);
+  int spec2 = helper(b);
+  return spec1 + spec2;
+}
+
+public int helper(int[] a) {
+  int tmp = 0;
+  for (int i = 0; i < a.length; i++) {
+    if (a[i] % 10 == 0 && a[i] > tmp)
+      tmp = a[i];
+  }
+  return tmp;
+}
+
+----------------------------------------------------
+
+public int sumHeights(int[] heights, int start, int end) {
+  int tmp = 0;
+  for (int i = start; i <= end-1; i++) {
+    tmp += Math.abs(heights[i] - heights[i+1]);
+  }
+  return tmp;
+}
+
+----------------------------------------------------
+
+public int sumHeights2(int[] heights, int start, int end) {
+    int tmp = 0;
+  for (int i = start; i <= end-1; i++) {
+    if (heights[i] < heights[i+1]) {
+      tmp += 2 * (Math.abs(heights[i] - heights[i+1]));
+    }
+    else
+      tmp += Math.abs(heights[i] - heights[i+1]);
+  }
+  return tmp;
+}
+
+----------------------------------------------------
+
+public int bigHeights(int[] heights, int start, int end) {
+  int tmp = 0;
+  for (int i = start; i <= end-1; i++) {
+    if (Math.abs(heights[i] - heights[i+1]) >= 5) {
+      tmp++;
+    }
+  }
+  return tmp;
+}
+
+----------------------------------------------------
+
+public int userCompare(String aName, int aId, String bName, int bId) {
+  if (aName.equals(bName) && aId == bId)
+    return 0;
+  
+  int result = aName.compareTo(bName);
+  if (result < 0)
+    return -1;
+  else if (result > 0)
+    return 1;
+  else if (aId > bId)
+    return 1;
+  else
+    return -1;
+    
+}
+
+----------------------------------------------------
+
+public String[] mergeTwo(String[] a, String[] b, int n) {
+  String out[] = new String[n];
+  int aindex =0, bindex=0;
+  for(int i=0; i<n; i++)
+  {
+    int cmp = a[aindex].compareTo( b[bindex] );
+    if(cmp<=0)
+    {
+      out[i] = a[aindex++];
+      if(cmp == 0) bindex++;
+    }
+    else
+    {
+      out[i] = b[bindex++];
+    }
+  } 
+  return out;
+}
+
+----------------------------------------------------
+
+public int commonTwo(String[] a, String[] b) {   
+  int count = 0;
+  String str = "";
+  for (int i = 0; i < b.length; i++) {
+    for (int j = 0; j < a.length; j++) {
+      if (a[j].equals(b[i]) && !str.contains(a[j])) {
+        str += a[j];
+        count++;
+      }
+    }
+  }
+  return count;
+}
