@@ -1,0 +1,127 @@
+public boolean makeBricks(int small, int big, int goal)
+{
+	int maxBig = goal/5;
+	if(maxBig <= big)
+		goal -= maxBig*5;
+	else
+		goal -= big*5;
+	if(goal <= small)
+		return true;
+	return false;
+}
+
+----------------------------------------------------
+
+public int loneSum(int a, int b, int c)
+{
+	if(a == b)
+	{
+    	if(a == c)
+    	  return 0;
+    	return c;
+  	}
+  	if(a == c)
+    	return b; 
+  	if(b == c)
+    	return a;
+  return (a + b + c);
+}
+
+----------------------------------------------------
+
+public int luckySum(int a, int b, int c)
+{
+	if(a == 13)
+		return 0;
+	if(b == 13)
+		return a;
+	if(c == 13)
+		return (a + b);
+	return (a + b + c);
+}
+
+----------------------------------------------------
+
+public int fixTeen(int n)
+{
+	if(n < 13 || n > 19 || n == 15 || n == 16)
+		return n;
+	return 0;
+}
+public int noTeenSum(int a, int b, int c)
+{  return (fixTeen(a) + fixTeen(b) +fixTeen(c)); }
+
+----------------------------------------------------
+
+public int round10(int num)
+{
+	int digit = num % 10;
+	if(digit >= 5)
+		return num + (10 - digit);
+	return num - digit;
+}
+public int roundSum(int a, int b, int c)
+{	return (round10(a) + round10(b) + round10(c));	}
+
+----------------------------------------------------
+
+public boolean closeFar(int a, int b, int c)
+{
+	return (Math.abs(b-a) <= 1 && Math.abs(c-a) >= 2 && Math.abs(c-b) >= 2
+		|| Math.abs(c-a) <= 1 && Math.abs(b-a) >= 2 && Math.abs(b-c) >= 2);
+}
+
+----------------------------------------------------
+
+public int blackjack(int a, int b)
+{
+	if(a > 21)
+	{
+		if(b > 21)
+			return 0;
+		return b;
+	}
+	if(a < b && b <= 21)
+		return b;
+	return a;
+}
+
+----------------------------------------------------
+
+public boolean evenlySpaced(int a, int b, int c)
+{
+	int temp;
+	if(b > a)
+	{
+		temp = a;
+		a = b;
+		b = temp;
+	}
+	if(c > b)
+	{
+		temp = b;
+		b =c;
+		c = temp;
+	}
+	if(b > a)
+	{
+		temp = a;
+		a = b;
+		b = temp;
+	}
+	return(a - b == b - c);
+}
+
+----------------------------------------------------
+
+public int makeChocolate(int small, int big, int goal)
+{
+	int maxBig = goal/5;
+	if(maxBig <= big)
+		goal -= maxBig*5;
+	else
+		goal -= big*5;
+	if(goal <= small)
+		return goal;
+	return -1;
+}
