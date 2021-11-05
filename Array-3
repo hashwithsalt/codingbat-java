@@ -1,0 +1,161 @@
+public int maxSpan(int[] nums) 
+{
+	int maxSpan = 0;
+	int span;
+	int j;
+	for(int i = 0; i < nums.length; i++)
+	{
+		for(j = nums.length - 1; nums[i] != nums[j]; j--);
+		span = 1 + j - i;
+		if(span > maxSpan)
+			maxSpan = span;
+	}
+	return maxSpan;
+}
+
+----------------------------------------------------
+
+public int[] fix34(int[] nums) 
+{
+	int j = 1;
+	for(int i = 0; i < nums.length - 1; i++)
+	{
+		if(nums[i] == 3 && nums[i+1] != 4)
+		{
+			for(; nums[j] != 4; j++);
+			nums[j] = nums[i+1];
+			nums[i+1] = 4;
+		}
+	}
+	return nums;
+}
+
+----------------------------------------------------
+
+public int[] fix45(int[] nums)
+{
+  int j = 0;
+	for(int i = 0; i < nums.length - 1; i++)
+	{
+		if(nums[i] == 4 && nums[i+1] != 5)
+		{
+			for(; !(nums[j] == 5 && (j == 0 || j > 0 && nums[j-1] != 4)); j++);
+			nums[j] = nums[i+1];
+			nums[i+1] = 5;
+		}
+	}
+	return nums;
+}
+
+----------------------------------------------------
+
+public boolean canBalance(int[] nums)
+{
+	int left = 0;
+	int right;
+	for(int i = 0; i < nums.length - 1; i++)
+		left += nums[i];
+	right = nums[nums.length-1];
+	for(int i = nums.length - 2; i > 0; i--)
+	{
+		if(left == right)
+			return true;
+		left -= nums[i];
+		right += nums[i];
+	}
+	return (left == right);
+}
+
+----------------------------------------------------
+
+public boolean linearIn(int[] outer, int[] inner)
+{
+	boolean notFound;
+  for(int inI = 0, outI = 0; inI < inner.length; inI++)
+  {
+  	notFound = true;
+  	for(; outI < outer.length && notFound; outI++)
+  	{
+  		if(inner[inI] == outer[outI])
+  			notFound = false;
+  	}
+  	if(notFound)
+  		return false;
+  }
+  return true;
+}
+
+----------------------------------------------------
+
+public int[] squareUp(int n)
+{
+	int[] arr = new int[n*n];
+	int p;
+	for(int i = 1; i <= n; i++)
+	{
+		p = n * i - 1;
+		for(int j = 1; j <= i; j++, p--)
+			arr[p] = j;
+	}
+	return arr;
+}
+
+----------------------------------------------------
+
+public int[] seriesUp(int n) 
+{
+	int[] arr = new int[n*(n+1)/2];
+	int p = 0;
+	for(int i = 1; i <= n; i++)
+	{
+		for(int j = 1; j <= i; j++, p++)
+			arr[p] = j;
+	}
+	return arr;
+}
+
+----------------------------------------------------
+
+public int maxMirror(int[] nums) {
+  int len = nums.length;
+  int count= 0;
+  int max = 0;
+  for (int i = 0; i < len; i++){
+    count=0;
+    for (int j = len-1; i + count < len && j > -1; j--){
+      if(nums[i+count] == nums[j]){
+        count++;
+      }
+      else{
+        if (count > 0){
+          max = Math.max(count,max);
+          count = 0;
+        }
+      }
+    }
+    max = Math.max(count,max);
+  }
+  return max;
+}
+
+----------------------------------------------------
+
+public int countClumps(int[] nums)
+{
+	int clumps = 0;
+	boolean isClump = false;
+  for(int i = 0; i < nums.length - 1; i++)
+  {
+  	if(isClump)
+  	{
+	  	if(nums[i] != nums[i+1])
+	  		isClump = false;
+	  }
+  	else if(nums[i] == nums[i+1])
+  	{
+  		isClump = true;
+  		clumps++;
+  	}
+  }
+  return clumps;
+}
