@@ -1,0 +1,131 @@
+public boolean groupSum(int start, int[] nums, int target)
+{
+  if(target == 0)
+  	return true;
+  if(start == nums.length)
+  	return false;
+  if(groupSum(start + 1, nums, target - nums[start]))
+  	return true;
+  return groupSum(start + 1, nums, target);
+}
+
+----------------------------------------------------
+
+public boolean groupSum6(int start, int[] nums, int target)
+{
+  if(start == nums.length)
+ 	{
+		if(target == 0)
+  		return true;
+  	return false;
+ 	}
+ 	if(nums[start] == 6)
+ 		return groupSum6(start + 1, nums, target - nums[start]);
+  if(groupSum6(start + 1, nums, target - nums[start]))
+  	return true;
+  return groupSum6(start + 1, nums, target);
+}
+
+----------------------------------------------------
+
+public boolean groupNoAdj(int start, int[] nums, int target)
+{
+	if(target == 0)
+  	return true;
+  if(start >= nums.length)
+  	return false;
+  if(groupNoAdj(start + 2, nums, target - nums[start]))
+  	return true;
+  return groupNoAdj(start + 1, nums, target);
+}
+
+----------------------------------------------------
+
+public boolean groupSum5(int start, int[] nums, int target)
+{
+	if(start >= nums.length)
+ 	{
+		if(target == 0)
+  		return true;
+  	return false;
+ 	}
+ 	if(nums[start] % 5 == 0)
+ 	{
+ 		if(start < nums.length - 1 && nums[start+1] == 1)
+	 		return groupSum5(start + 2, nums, target - nums[start]);
+	 	return groupSum5(start + 1, nums, target - nums[start]);
+ 	}
+  if(groupSum5(start + 1, nums, target - nums[start]))
+  	return true;
+  return groupSum5(start + 1, nums, target);
+}
+
+----------------------------------------------------
+
+public boolean groupSumClump(int start, int[] nums, int target)
+{
+	if(start >= nums.length)
+ 	{
+		if(target == 0)
+  		return true;
+  	return false;
+ 	}
+ 	int i = start + 1;
+ 	for(;  i < nums.length && nums[start] == nums[i]; i++);
+ 	if(groupSumClump(i, nums, target - ((i - start) * nums[start])))
+ 		return true;
+ 	return groupSumClump(i, nums, target);	
+}
+
+----------------------------------------------------
+
+public boolean splitArray(int[] nums)
+{	return sidesAreEqual(nums, 0, 0);	}
+
+public boolean sidesAreEqual(int[] nums, int i, int balance)
+{
+	if(i == nums.length)
+		return (balance == 0);
+	if(sidesAreEqual(nums, i + 1, balance + nums[i]))
+		return true;
+	return sidesAreEqual(nums, i + 1, balance - nums[i]);
+}
+
+----------------------------------------------------
+
+public boolean splitOdd10(int[] nums)
+{	return sidesAreOdd10(nums, 0, 0, 0);	}
+
+public boolean sidesAreOdd10(int[] nums, int i, int group1, int group2)
+{
+	if(i == nums.length)
+		return (group1 % 2 == 1 && group2 % 10 == 0 || group2 % 2 == 1 && group1 % 10 == 0);
+	if(sidesAreOdd10(nums, i + 1, group1 + nums[i], group2))
+		return true;
+	return sidesAreOdd10(nums, i + 1, group1, group2 + nums[i]);
+}
+
+----------------------------------------------------
+
+public boolean split53(int[] nums) {
+  int index = 0;
+  int sum1 = 0;
+  int sum2 = 0;
+  return recArray(nums, index, sum1, sum2);
+}
+ 
+private boolean recArray ( int[] nums, int index, int sum1, int sum2 ) {
+  if ( index >= nums.length ) {
+    return sum1 == sum2;
+  }
+ 
+  int value = nums[index];
+ 
+  if (value%5 == 0)
+    return recArray(nums, index + 1, sum1 + value, sum2);
+  else if (value%3 == 0)
+    return recArray(nums, index + 1, sum1, sum2 + value);
+  else    
+    return (recArray(nums, index + 1, sum1 + value, sum2) ||
+      recArray(nums, index + 1, sum1, sum2 + value));
+}
